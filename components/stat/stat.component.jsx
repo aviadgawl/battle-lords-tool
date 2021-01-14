@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { StyleSheet, Button, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+import { Icon } from 'react-native-elements';
 
 export default function Stat(props) {
 
@@ -18,9 +19,19 @@ export default function Stat(props) {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>{props.title}</Text>
-      <Button color='#9da1a1' style={styles.btn} onPress={decrament} title="Sub(-)"></Button>
+      <Icon
+        name='minus-square'
+        type='font-awesome'
+        size={50}
+        onPress={decrament}
+      />
       <Text style={styles.text}>{statValue}</Text>
-      <Button color='#9da1a1' style={styles.btn} onPress={incrment} title="Inc(+)"></Button>
+      <Icon
+        name='plus-square'
+        type='font-awesome'
+        size={50}
+        onPress={incrment}
+      />
     </View>
   );
 }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, View, Button } from 'react-native';
 import TabButton from '../tab-button/tab-button.component';
+import { Icon } from 'react-native-elements';
 
 export default function Tabs(props) {
 
@@ -11,10 +12,12 @@ export default function Tabs(props) {
     const addTab = () => {
         setTabsCount(tabsCount + 1);
         setIsEditingTab(true);
+        props.onTabsCountChange(tabsCount + 1);
     }
 
     const removeTab = () => {
         setTabsCount(tabsCount - 1);
+        props.onTabsCountChange(tabsCount - 1);
     }
 
     const handleTabEdit = (isEditing) => {
@@ -23,6 +26,19 @@ export default function Tabs(props) {
 
     const handleTabButtonClick = (index) => {
         setSelectedTab(index);
+        props.onSelectChange(index);
+    }
+
+    const renderAddBtn = (key) => {
+        return <View key={key}><Icon name='plus-square' size={40}
+            type='font-awesome'
+            onPress={addTab} /></View>
+    }
+
+    const renderRemoveBtn = (key) => {
+        return <View key={key} style={{ marginLeft: 10 }}><Icon name='minus-square' size={40}
+            type='font-awesome'
+            onPress={removeTab} /></View>
     }
 
     let tabs = [];
@@ -36,22 +52,18 @@ export default function Tabs(props) {
     if (!isEditingTab) {
         if (tabsCount === 1) {
             tabs.push(
-                <View key={4} style={styles.btn}>
-                    <Button key={4} onPress={addTab} title="add"></Button>
-                </View>
+                renderAddBtn(3)
             );
         } else if (tabsCount === 2) {
             tabs.push(
-                <View key={4} style={styles.btn}>
-                    <Button key={4} onPress={addTab} title="add"></Button>
-                </View>
+                renderAddBtn(3)
             );
             tabs.push(
-                <Button key={5} onPress={removeTab} title="remove"></Button>
+                renderRemoveBtn(4)
             );
         } else if (tabsCount === 3) {
             tabs.push(
-                <Button key={5} onPress={removeTab} title="remove"></Button>
+                renderRemoveBtn(4)
             );
         }
     }
@@ -65,8 +77,5 @@ const styles = StyleSheet.create({
         flex: 1,
         width: '100%',
         flexDirection: 'row',
-    },
-    btn: {
-        marginRight: 10,
-    },
+    }
 });

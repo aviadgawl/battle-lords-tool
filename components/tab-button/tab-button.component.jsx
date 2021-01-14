@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, TextInput, View, Button } from 'react-native';
+import { Icon } from 'react-native-elements';
 
 export default function TabButton(props) {
 
@@ -21,17 +22,22 @@ export default function TabButton(props) {
 
     let color = '';
 
-    if(props.isSelected){
-        color = '#e3c82d';
+    if (props.isSelected) {
+        color = 'grey';
+    }
+    else {
+        color = 'black'
     }
 
     return (
         <View style={styles.container}>
             {!showText && <Button color={color} onPress={handleTabButtonPress} title={tabName}></Button>}
             {showText && <View style={styles.subContainer}>
-                            <TextInput style={styles.textInput} onChangeText={handleName} placeholder="champion name" />
-                            <Button onPress={handleSaveButtonPress} title="Save"></Button>
-                        </View>}
+                <TextInput style={styles.textInput} onChangeText={handleName} placeholder="champion name" />
+                <Icon name='check-square' size={40}
+                    type='font-awesome'
+                    onPress={handleSaveButtonPress} />
+            </View>}
         </View>
     );
 }
@@ -44,7 +50,7 @@ const styles = StyleSheet.create({
     subContainer: {
         flexDirection: 'row',
     },
-    textInput:{
-        marginRight:10,
+    textInput: {
+        marginRight: 10,
     }
 });

@@ -8,61 +8,101 @@ import Tabs from './components/tabs/tabs.component';
 
 export default function App() {
 
-  const [currentTab, setCurrentTab] = useState(1);
+  const [tabOneStyle, setTabOneStyle] = useState(styles.show);
+  const [tabTwoStyle, setTabTwoStyle] = useState(styles.hide);
+  const [tabThreeStyle, setTabThreeStyle] = useState(styles.hide);
+  const [tabCount, setTabCount] = useState(1);
+
+  const onSelectTab = (tabNumber) => {
+    switch (tabNumber) {
+      case 1:
+        setTabOneStyle(styles.show);
+        setTabTwoStyle(styles.hide);
+        setTabThreeStyle(styles.hide);
+        break;
+      case 2:
+        setTabOneStyle(styles.hide);
+        setTabTwoStyle(styles.show);
+        setTabThreeStyle(styles.hide);
+        break;
+      case 3:
+        setTabOneStyle(styles.hide);
+        setTabTwoStyle(styles.hide);
+        setTabThreeStyle(styles.show);
+        break;
+      default:
+        setTabOneStyle(styles.show);
+        setTabTwoStyle(styles.hide);
+        setTabThreeStyle(styles.hide);
+        break;
+    }
+  }
+
+  const countTabChange = (tabCount) => {
+    setTabCount(tabCount);
+  }
 
   return (
-    <View style={styles.container}>
-      <ScrollView>
-        <View style={styles.championsTabs}>
-          <Tabs onSelectChange={(tabNumber) => { setCurrentTab(tabNumber) }}></Tabs>
+    <View style={styles.viewContainer}>
+      <View style={styles.championsTabs}>
+        <Tabs onSelectChange={onSelectTab} onTabsCountChange={countTabChange}></Tabs>
+      </View>
+
+      <View style={styles.championStats}>
+        <View style={tabOneStyle}>
+          <Champion></Champion>
         </View>
 
-        <View style={styles.championStats}>
-          {(currentTab === 1) && <Champion></Champion>}
-          {(currentTab === 2) && <Champion></Champion>}
-          {(currentTab === 3) && <Champion></Champion>}
-        </View>
+        {tabCount >= 2 && <View style={tabTwoStyle}>
+          <Champion></Champion>
+        </View>}
 
-        <View style={styles.castleStats}>
-          <Stat startValue={20}></Stat>
-        </View>
+        {tabCount >= 3 && <View style={tabThreeStyle}>
+          <Champion></Champion>
+        </View>}
 
-        <StatusBar style='auto' />
-      </ScrollView>
+      </View>
+
+      <View style={styles.castleStats}>
+        <Stat startValue={20}></Stat>
+      </View>
+      <StatusBar style='auto' />
     </View>
-
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  viewContainer: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
+    flexDirection: "column",
+    padding: 5,
   },
   championsTabs: {
-    flex: 0.4,
-    width: '100%',
-    alignItems: 'flex-start',
-    justifyContent: 'flex-end',
     borderWidth: 1,
-    marginTop: 70,
+    marginTop: 100,
+    width: '100%',
+    height: 50,
     padding: 5,
   },
   championStats: {
-    flex: 6,
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '100%',
     borderWidth: 1,
-    padding: 5,
+    width: '100%',
+    height: '70%',
+  },
+  stats: {
+    width: '100%',
+    height: '100%'
   },
   castleStats: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    width: '100%',
-    padding: 5,
     borderWidth: 1,
+    width: '100%',
+    height: '10%',
   },
+  show: {
+    opacity: 1, height: '100%', width: '100%'
+  },
+  hide: {
+    opacity: 0, height: 0
+  }
 });
