@@ -31,10 +31,10 @@ export default function TabButton(props) {
 
     return (
         <View style={styles.container}>
-            {!showText && <Button color={color} onPress={handleTabButtonPress} title={tabName}></Button>}
+            {!showText && <Button color={color} style={styles.button} onPress={handleTabButtonPress} title={tabName}></Button>}
             {showText && <View style={styles.subContainer}>
-                <TextInput style={styles.textInput} onChangeText={handleName} placeholder="champion name" />
-                <Icon name='check-square' size={40}
+                <TextInput maxLength={7} style={styles.textInput} onChangeText={handleName} placeholder="champion name" />
+                <Icon name='check-square' size={60}
                     type='font-awesome'
                     onPress={handleSaveButtonPress} />
             </View>}
@@ -51,6 +51,11 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     textInput: {
+        fontSize: 20,
         marginRight: 10,
+        width: '53%'
+    },
+    button: {
+       fontSize: 20 
     }
 });

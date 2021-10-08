@@ -6,14 +6,12 @@ export default function Stat(props) {
 
   const [statValue, setStatValue] = useState(props.startValue);
 
-  incrment = () => {
-    setStatValue(statValue + 1);
+  const incrment = () => {
+    if(statValue < 100) setStatValue(statValue + 1);
   }
 
-  decrament = () => {
-    if (statValue > 0) {
-      setStatValue(statValue - 1);
-    }
+  const decrament = () => {
+    if (statValue > 0) setStatValue(statValue - 1);
   }
 
   return (
@@ -22,14 +20,14 @@ export default function Stat(props) {
       <Icon
         name='minus-square'
         type='font-awesome'
-        size={50}
+        size={60}
         onPress={decrament}
       />
       <Text style={styles.text}>{statValue}</Text>
       <Icon
         name='plus-square'
         type='font-awesome'
-        size={50}
+        size={60}
         onPress={incrment}
       />
     </View>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Button } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import TabButton from '../tab-button/tab-button.component';
 import { Icon } from 'react-native-elements';
 
@@ -30,45 +30,36 @@ export default function Tabs(props) {
     }
 
     const renderAddBtn = (key) => {
-        return <View key={key}><Icon name='plus-square' size={40}
+        return <View key={key}><Icon name='plus-square' size={60}
             type='font-awesome'
             onPress={addTab} /></View>
     }
 
     const renderRemoveBtn = (key) => {
-        return <View key={key} style={{ marginLeft: 10 }}><Icon name='minus-square' size={40}
-            type='font-awesome'
-            onPress={removeTab} /></View>
+        return <View key={key} style={{ marginLeft: 10 }}>
+                <Icon name='minus-square' size={60} type='font-awesome' onPress={removeTab} />
+            </View>
     }
 
-    let tabs = [];
+    const renderTabs = () => {
+        let tabs = [];
 
-    for (let index = 1; index <= tabsCount; index++) {
-
-        tabs.push(<TabButton onEdit={handleTabEdit} isSelected={index === selectedTab}
-            key={index} index={index} onClick={handleTabButtonClick}></TabButton>);
-    }
-
-    if (!isEditingTab) {
-        if (tabsCount === 1) {
-            tabs.push(
-                renderAddBtn(3)
-            );
-        } else if (tabsCount === 2) {
-            tabs.push(
-                renderAddBtn(3)
-            );
-            tabs.push(
-                renderRemoveBtn(4)
-            );
-        } else if (tabsCount === 3) {
-            tabs.push(
-                renderRemoveBtn(4)
-            );
+        for (let index = 1; index <= tabsCount; index++) {
+    
+            tabs.push(<TabButton onEdit={handleTabEdit} isSelected={index === selectedTab}
+                key={index} index={index} onClick={handleTabButtonClick}></TabButton>);
         }
+    
+        if (!isEditingTab) {
+            if (tabsCount < 3) tabs.push(renderAddBtn(3));
+            if (tabsCount > 0) tabs.push(renderRemoveBtn(4));
+        }
+
+        return tabs;
     }
+
     return <View style={styles.container}>
-        {tabs}
+        {renderTabs()}
     </View>;
 }
 

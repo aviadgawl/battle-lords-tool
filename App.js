@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, View, ScrollView } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import Stat from './components/stat/stat.component';
 import Champion from './components/champion/champion.component';
@@ -44,28 +44,30 @@ export default function App() {
 
   return (
     <View style={styles.viewContainer}>
+
       <View style={styles.championsTabs}>
         <Tabs onSelectChange={onSelectTab} onTabsCountChange={countTabChange}></Tabs>
       </View>
 
       <View style={styles.championStats}>
         <View style={tabOneStyle}>
-          <Champion></Champion>
+          <Champion />
         </View>
 
         {tabCount >= 2 && <View style={tabTwoStyle}>
-          <Champion></Champion>
+          <Champion />
         </View>}
 
         {tabCount >= 3 && <View style={tabThreeStyle}>
-          <Champion></Champion>
+          <Champion />
         </View>}
 
       </View>
 
       <View style={styles.castleStats}>
-        <Stat startValue={20}></Stat>
+        <Stat title="Tower:" startValue={20}></Stat>
       </View>
+
       <StatusBar style='auto' />
     </View>
   );
@@ -82,7 +84,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginTop: 100,
     width: '100%',
-    height: 50,
+    height: 80,
     padding: 5,
   },
   championStats: {
