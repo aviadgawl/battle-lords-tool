@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, TextInput, View, Button } from 'react-native';
+import { StyleSheet, TextInput, View, TouchableWithoutFeedback , Text } from 'react-native';
 import { Icon } from 'react-native-elements';
 
 export default function TabButton(props) {
@@ -31,9 +31,17 @@ export default function TabButton(props) {
 
     return (
         <View style={styles.container}>
-            {!showText && <Button color={color} style={styles.button} onPress={handleTabButtonPress} title={tabName}></Button>}
+            {!showText && <TouchableWithoutFeedback color={color}
+                    style={styles.button} onPress={handleTabButtonPress}>
+                         <View style={styles.button}>
+                            <Text style={styles.text}>{tabName}</Text>
+                        </View>
+                    </TouchableWithoutFeedback>}
             {showText && <View style={styles.subContainer}>
-                <TextInput maxLength={7} style={styles.textInput} onChangeText={handleName} placeholder="champion name" />
+                <TextInput maxLength={7} 
+                            style={styles.textInput} 
+                            onChangeText={handleName} 
+                            placeholder="champion name" />
                 <Icon name='check-square' size={60}
                     type='font-awesome'
                     onPress={handleSaveButtonPress} />
@@ -51,11 +59,17 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     textInput: {
-        fontSize: 20,
+        fontSize: 23,
         marginRight: 10,
         width: '53%'
     },
+    text: {
+        fontSize: 23,
+    },
     button: {
-       fontSize: 20 
+       fontSize: 20,
+       justifyContent: 'center',
+       backgroundColor: '#a8adb5',
+       padding: 5
     }
 });

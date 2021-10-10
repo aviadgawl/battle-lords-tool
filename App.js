@@ -79,18 +79,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: "column",
     padding: 5,
+    justifyContent: 'flex-end'
   },
   championsTabs: {
     borderWidth: 1,
     marginTop: 100,
     width: '100%',
-    height: 80,
+    height: '10%',
     padding: 5,
   },
   championStats: {
     borderWidth: 1,
     width: '100%',
-    height: '70%',
+    height: '60%',
   },
   stats: {
     width: '100%',

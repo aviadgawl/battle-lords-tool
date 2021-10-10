@@ -23,6 +23,7 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png"
       },
+      "softwareKeyboardLayoutMode": "pan",
       "package": "com.aviadgawl.battlelordstool"
     },
     "web": {
