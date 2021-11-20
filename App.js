@@ -30,7 +30,7 @@ export default function App() {
 
     for (let i = 0; i < buildingTabs; i++) {
       champions.push(<View key={i} style={selectedBuildingTab === (i + 1) ? styles.show : styles.hide}>
-        <Stat title="HP:" startValue={27}></Stat>
+        <Stat icon="hp" title="HP:" startValue={27}></Stat>
       </View>);
     }
 

@@ -7,15 +7,31 @@ export default function Stat(props) {
   const [statValue, setStatValue] = useState(props.startValue);
 
   const incrment = () => {
-    if(statValue < 100) setStatValue(statValue + 1);
+    if (statValue < 100) setStatValue(statValue + 1);
   }
 
   const decrament = () => {
     if (statValue > 0) setStatValue(statValue - 1);
   }
 
+  const constGetIconName = () => {
+    switch (props.icon) {
+      case 'hp':
+        return 'heart';
+      case 'dex':
+        return 'bolt';
+      case 'str':
+        return 'hand-rock-o'
+      case 'int':
+        return 'leanpub'
+      default:
+        return '';
+    }
+  }
+
   return (
     <View style={styles.container}>
+      <Icon name={constGetIconName()} type='font-awesome' size={40} />
       <Text style={styles.text}>{props.title}</Text>
       <Icon
         name='minus-square'
@@ -48,5 +64,10 @@ const styles = StyleSheet.create({
   },
   btn: {
     width: 100,
+  },
+  stat: {
+    flex: 1,
+    flexDirection: 'row',
+    marginLeft: 10,
   }
 });

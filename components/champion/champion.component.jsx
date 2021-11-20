@@ -9,20 +9,16 @@ export default function Champion() {
   return (
     <View style={styles.container}>
       <View style={styles.stat}>
-        <Icon style={styles.stat} name='hand-rock-o' type='font-awesome' size={40} />
-        <Stat startValue={0} title="STR:"></Stat>
+        <Stat icon="str" startValue={0} title="STR:"></Stat>
       </View>
       <View style={styles.stat}>
-        <Icon style={styles.stat} name='bolt' type='font-awesome' size={40} />
-        <Stat startValue={0} title="DEX:"></Stat>
+        <Stat icon="dex" startValue={0} title="DEX:"></Stat>
       </View>
       <View style={styles.stat}>
-        <Icon style={styles.stat} name='leanpub' type='font-awesome' size={40} />
-        <Stat startValue={0} title="INT:"></Stat>
+        <Stat icon="int" startValue={0} title="INT:"></Stat>
       </View>
       <View style={styles.stat}>
-        <Icon style={styles.stat} name='heart' type='font-awesome' size={40} />
-        <Stat startValue={0} title="HP:"></Stat>
+        <Stat icon="hp" startValue={0} title="HP:"></Stat>
       </View>
     </View>
   );
