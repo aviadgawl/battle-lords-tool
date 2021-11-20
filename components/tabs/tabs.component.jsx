@@ -46,7 +46,7 @@ export default function Tabs(props) {
 
         for (let index = 1; index <= tabsCount; index++) {
     
-            tabs.push(<TabButton onEdit={handleTabEdit} isSelected={index === selectedTab}
+            tabs.push(<TabButton placeholder={props.placeholder} onEdit={handleTabEdit} isSelected={index === selectedTab}
                 key={index} index={index} onClick={handleTabButtonClick}></TabButton>);
         }
     

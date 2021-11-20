@@ -41,7 +41,7 @@ export default function TabButton(props) {
                 <TextInput maxLength={7} 
                             style={styles.textInput} 
                             onChangeText={handleName} 
-                            placeholder="champion name" />
+                            placeholder={props.placeholder} />
                 <Icon name='check-square' size={60}
                     type='font-awesome'
                     onPress={handleSaveButtonPress} />

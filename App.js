@@ -7,68 +7,60 @@ import Champion from './components/champion/champion.component';
 import Tabs from './components/tabs/tabs.component';
 
 export default function App() {
+  const [championTabs, setChampionTabs] = useState(1);
+  const [selectedChampionTab, setSelectedChampionTab] = useState(1);
 
-  const [tabOneStyle, setTabOneStyle] = useState(styles.show);
-  const [tabTwoStyle, setTabTwoStyle] = useState(styles.hide);
-  const [tabThreeStyle, setTabThreeStyle] = useState(styles.hide);
-  const [tabCount, setTabCount] = useState(1);
+  const [buildingTabs, setBuldingTabs] = useState(1);
+  const [selectedBuildingTab, setSelectedBuildingTab] = useState(1);
 
-  const onSelectTab = (tabNumber) => {
-    switch (tabNumber) {
-      case 1:
-        setTabOneStyle(styles.show);
-        setTabTwoStyle(styles.hide);
-        setTabThreeStyle(styles.hide);
-        break;
-      case 2:
-        setTabOneStyle(styles.hide);
-        setTabTwoStyle(styles.show);
-        setTabThreeStyle(styles.hide);
-        break;
-      case 3:
-        setTabOneStyle(styles.hide);
-        setTabTwoStyle(styles.hide);
-        setTabThreeStyle(styles.show);
-        break;
-      default:
-        setTabOneStyle(styles.show);
-        setTabTwoStyle(styles.hide);
-        setTabThreeStyle(styles.hide);
-        break;
+  const renderChampions = () => {
+    let champions = [];
+
+    for (let i = 0; i < championTabs; i++) {
+      champions.push(<View key={i} style={selectedChampionTab === (i + 1) ? styles.show : styles.hide}>
+        <Champion />
+      </View>);
     }
+
+    return champions;
   }
 
-  const countTabChange = (tabCount) => {
-    setTabCount(tabCount);
+  const renderBuldings = () => {
+    let champions = [];
+
+    for (let i = 0; i < buildingTabs; i++) {
+      champions.push(<View key={i} style={selectedBuildingTab === (i + 1) ? styles.show : styles.hide}>
+        <Stat title="HP:" startValue={27}></Stat>
+      </View>);
+    }
+
+    return champions;
   }
 
   return (
     <View style={styles.viewContainer}>
-
       <View style={styles.championsTabs}>
-        <Tabs onSelectChange={onSelectTab} onTabsCountChange={countTabChange}></Tabs>
+        <Tabs onSelectChange={(tabSelected) => { setSelectedChampionTab(tabSelected) }}
+          onTabsCountChange={(tabsCount) => { setChampionTabs(tabsCount) }}
+          placeholder="Champion">
+        </Tabs>
       </View>
 
       <View style={styles.championStats}>
-        <View style={tabOneStyle}>
-          <Champion />
-        </View>
+        {renderChampions()}
+      </View>
 
-        {tabCount >= 2 && <View style={tabTwoStyle}>
-          <Champion />
-        </View>}
-
-        {tabCount >= 3 && <View style={tabThreeStyle}>
-          <Champion />
-        </View>}
-
+      <View style={styles.championsTabs}>
+        <Tabs onSelectChange={(tabSelected) => { setSelectedBuildingTab(tabSelected) }}
+          onTabsCountChange={(tabsCount) => { setBuldingTabs(tabsCount) }}
+          placeholder="Bulding"></Tabs>
       </View>
 
       <View style={styles.castleStats}>
-        <Stat title="Tower:" startValue={20}></Stat>
+        {renderBuldings()}
       </View>
 
-      <StatusBar style='auto' />
+      <StatusBar style="auto" />
     </View>
   );
 }
@@ -83,7 +75,6 @@ const styles = StyleSheet.create({
   },
   championsTabs: {
     borderWidth: 1,
-    marginTop: 100,
     width: '100%',
     height: '10%',
     padding: 5,
@@ -91,21 +82,13 @@ const styles = StyleSheet.create({
   championStats: {
     borderWidth: 1,
     width: '100%',
-    height: '60%',
-  },
-  stats: {
-    width: '100%',
-    height: '100%'
+    height: '50%',
   },
   castleStats: {
     borderWidth: 1,
     width: '100%',
     height: '10%',
   },
-  show: {
-    opacity: 1, height: '100%', width: '100%'
-  },
-  hide: {
-    opacity: 0, height: 0
-  }
+  hide: { height: '0%', opacity: 0 },
+  show: { height: '100%', opacity: 1 }
 });
