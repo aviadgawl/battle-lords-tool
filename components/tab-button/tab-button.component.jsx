@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, TextInput, View, TouchableWithoutFeedback , Text } from 'react-native';
+import { StyleSheet, TextInput, View, TouchableOpacity, Text } from 'react-native';
 import { Icon } from 'react-native-elements';
 
 export default function TabButton(props) {
@@ -20,28 +20,22 @@ export default function TabButton(props) {
         props.onEdit(false);
     }
 
-    let color = '';
-
-    if (props.isSelected) {
-        color = 'grey';
-    }
-    else {
-        color = 'black'
-    }
-
     return (
         <View style={styles.container}>
-            {!showText && <TouchableWithoutFeedback color={color}
-                    style={styles.button} onPress={handleTabButtonPress}>
-                         <View style={styles.button}>
-                            <Text style={styles.text}>{tabName}</Text>
-                        </View>
-                    </TouchableWithoutFeedback>}
+            {!showText && <TouchableOpacity style={{
+                justifyContent: 'center',
+                backgroundColor: props.isSelected ? 'lightgrey' : 'grey',
+                padding: 5
+            }} onPress={handleTabButtonPress}>
+                <View style={styles.text}>
+                    <Text style={styles.text}>{tabName}</Text>
+                </View>
+            </TouchableOpacity>}
             {showText && <View style={styles.subContainer}>
-                <TextInput maxLength={7} 
-                            style={styles.textInput} 
-                            onChangeText={handleName} 
-                            placeholder={props.placeholder} />
+                <TextInput maxLength={6}
+                    style={styles.textInput}
+                    onChangeText={handleName}
+                    placeholder={props.placeholder} />
                 <Icon name='check-square' size={60}
                     type='font-awesome'
                     onPress={handleSaveButtonPress} />
@@ -59,17 +53,11 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     textInput: {
-        fontSize: 23,
+        fontSize: 25,
         marginRight: 10,
         width: '53%'
     },
     text: {
-        fontSize: 23,
-    },
-    button: {
-       fontSize: 20,
-       justifyContent: 'center',
-       backgroundColor: '#a8adb5',
-       padding: 5
+        fontSize: 25,
     }
 });

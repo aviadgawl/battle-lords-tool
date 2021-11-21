@@ -53,7 +53,7 @@ export default function App() {
       <View style={styles.championsTabs}>
         <Tabs onSelectChange={(tabSelected) => { setSelectedBuildingTab(tabSelected) }}
           onTabsCountChange={(tabsCount) => { setBuldingTabs(tabsCount) }}
-          placeholder="Bulding"></Tabs>
+          placeholder="Building"></Tabs>
       </View>
 
       <View style={styles.castleStats}>
