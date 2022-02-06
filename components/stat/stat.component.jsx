@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 
 export default function Stat(props) {
 
-  const [statValue, setStatValue] = useState(props.startValue);
+  const [statValue, setStatValue] = React.useState(props.startValue);
 
   const incrment = () => {
     if (statValue < 100) setStatValue(statValue + 1);

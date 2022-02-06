@@ -20,13 +20,18 @@ export default function TabButton(props) {
         props.onEdit(false);
     }
 
+    const handleTabButtonLongPress = () => {
+        setShowText(true);
+        props.onEdit(true);
+    }
+
     return (
         <View style={styles.container}>
             {!showText && <TouchableOpacity style={{
                 justifyContent: 'center',
                 backgroundColor: props.isSelected ? 'lightgrey' : 'grey',
                 padding: 5
-            }} onPress={handleTabButtonPress}>
+            }} onLongPress={handleTabButtonLongPress} onPress={handleTabButtonPress}>
                 <View style={styles.text}>
                     <Text style={styles.text}>{tabName}</Text>
                 </View>

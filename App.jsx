@@ -1,12 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, I18nManager } from 'react-native';
 
 import Stat from './components/stat/stat.component';
 import Champion from './components/champion/champion.component';
 import Tabs from './components/tabs/tabs.component';
 
 export default function App() {
+  I18nManager.forceRTL(false);
+  I18nManager.allowRTL(false);
+
+  let pageX = 0;
+
   const [championTabs, setChampionTabs] = useState(1);
   const [selectedChampionTab, setSelectedChampionTab] = useState(1);
 
@@ -37,8 +42,22 @@ export default function App() {
     return champions;
   }
 
+  const handleLeftSwipe = () => {
+
+  }
+
+  const handleRightSwipe = () => {
+
+  }
+
   return (
-    <View style={styles.viewContainer}>
+    <View style={styles.viewContainer}
+      onTouchStart={(e) => { pageX = e.nativeEvent.pageX }}
+      onTouchEnd={(e) => {
+         if ((pageX - e.nativeEvent.pageX) > 100) handleLeftSwipe();
+         else if((e.nativeEvent.pageX - pageX) > 100) handleRightSwipe();
+         }}>
+
       <View style={styles.championsTabs}>
         <Tabs onSelectChange={(tabSelected) => { setSelectedChampionTab(tabSelected) }}
           onTabsCountChange={(tabsCount) => { setChampionTabs(tabsCount) }}
