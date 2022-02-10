@@ -27,21 +27,24 @@ export default function TabButton(props) {
 
     return (
         <View style={styles.container}>
-            {!showText && <TouchableOpacity style={{
+            
+            {!showText && <View style={{minWidth: 50 , height: '100%'}}>
+            <TouchableOpacity style={{
                 justifyContent: 'center',
                 backgroundColor: props.isSelected ? 'lightgrey' : 'grey',
-                padding: 5
+                padding: 5,
+                height: '100%'
             }} onLongPress={handleTabButtonLongPress} onPress={handleTabButtonPress}>
-                <View style={styles.text}>
-                    <Text style={styles.text}>{tabName}</Text>
-                </View>
-            </TouchableOpacity>}
+                <Text style={styles.text}>{tabName}</Text>
+            </TouchableOpacity></View>}
+            
             {showText && <View style={styles.subContainer}>
                 <TextInput maxLength={6}
                     style={styles.textInput}
                     onChangeText={handleName}
                     placeholder={props.placeholder} />
-                <Icon name='check-square' size={60}
+                <Icon name='check-square' 
+                    size={60}
                     type='font-awesome'
                     onPress={handleSaveButtonPress} />
             </View>}
@@ -53,16 +56,18 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         marginRight: 10,
+        height: '100%'
     },
     subContainer: {
         flexDirection: 'row',
+        width: 170,
     },
     textInput: {
         fontSize: 25,
-        marginRight: 10,
-        width: '53%'
+        marginRight: 5,
+        width: 115,
     },
     text: {
         fontSize: 25,
-    }
+    },
 });
