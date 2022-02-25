@@ -51,8 +51,8 @@ export default function Player({ navigation , isReadOnly }) {
         <View style={styles.viewContainer}
             onTouchStart={(e) => { pageX = e.nativeEvent.pageX }}
             onTouchEnd={(e) => {
-                if ((pageX - e.nativeEvent.pageX) > 100) handleLeftSwipe();
-                else if ((e.nativeEvent.pageX - pageX) > 100) handleRightSwipe();
+                if ((pageX - e.nativeEvent.pageX) > 100) handleRightSwipe();
+                else if ((e.nativeEvent.pageX - pageX) > 100) handleLeftSwipe();
             }}>
 
             <View style={styles.championsTabs}>
@@ -81,7 +81,6 @@ export default function Player({ navigation , isReadOnly }) {
 
 const styles = StyleSheet.create({
     viewContainer: {
-        flex: 1,
         alignItems: 'center',
         flexDirection: "column",
         padding: 5,
@@ -90,20 +89,21 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     championsTabs: {
+        flex: 1,
         borderWidth: 1,
         width: '100%',
-        height: '10%',
         padding: 5,
     },
     championStats: {
+        flex: 4,
         borderWidth: 1,
         width: '100%',
         height: '50%',
     },
     castleStats: {
+        flex: 1,
         borderWidth: 1,
         width: '100%',
-        height: '10%',
     },
     hide: { height: '0%', opacity: 0 },
     show: { height: '100%', opacity: 1 }
