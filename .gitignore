@@ -13,4 +13,5 @@ web-build/
 .DS_Store
 
 # custom ignore
-build/
+build
+.vscode
