@@ -8,6 +8,7 @@
     "eject": "expo eject",
     "root": "ren web-build root"
   },
+  "homepage": "/battle-lords-tool",
   "dependencies": {
     "@ant-design/icons": "^4.3.0",
     "@expo/vector-icons": "^12.0.2",
