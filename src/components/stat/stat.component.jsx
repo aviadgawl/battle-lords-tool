@@ -33,19 +33,19 @@ export default function Stat(props) {
     <View style={styles.container}>
       <Icon name={constGetIconName()} type='font-awesome' size={40} />
       <Text style={styles.text}>{props.title}</Text>
-      <Icon
+      {!props.isReadOnly && <Icon
         name='minus-square'
         type='font-awesome'
         size={60}
         onPress={decrament}
-      />
+      />}
       <Text style={styles.text}>{statValue}</Text>
-      <Icon
+      {!props.isReadOnly && <Icon
         name='plus-square'
         type='font-awesome'
         size={60}
         onPress={incrment}
-      />
+      />}
     </View>
   );
 }

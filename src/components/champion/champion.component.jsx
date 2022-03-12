@@ -3,21 +3,21 @@ import { StyleSheet, View } from 'react-native';
 
 import Stat from '../stat/stat.component';
 
-export default function Champion() {
+export default function Champion(props) {
 
   return (
     <View style={styles.container}>
       <View style={styles.stat}>
-        <Stat icon="str" startValue={0} title="STR:"></Stat>
+        <Stat isReadOnly={props.isReadOnly} icon="str" startValue={0} title="STR:"></Stat>
       </View>
       <View style={[styles.stat, styles.dex]}>
-        <Stat icon="dex" startValue={0} title="DEX:"></Stat>
+        <Stat isReadOnly={props.isReadOnly} icon="dex" startValue={0} title="DEX:"></Stat>
       </View>
       <View style={[styles.stat, styles.int]}>
-        <Stat icon="int" startValue={0} title="INT:"></Stat>
+        <Stat isReadOnly={props.isReadOnly} icon="int" startValue={0} title="INT:"></Stat>
       </View>
       <View style={[styles.stat, styles.hp]}>
-        <Stat icon="hp" startValue={0} title="HP:"></Stat>
+        <Stat isReadOnly={props.isReadOnly} icon="hp" startValue={0} title="HP:"></Stat>
       </View>
     </View>
   );
@@ -38,12 +38,12 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   dex: {
-    marginStart: 23,
+    marginStart: 24,
   },
   int: {
     marginEnd: 3,
   },
   hp: {
-    marginStart: 20,
+    marginStart: 21,
   },
 });

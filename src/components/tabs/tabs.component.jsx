@@ -30,9 +30,12 @@ export default function Tabs(props) {
     }
 
     const renderAddBtn = (key) => {
-        return <View key={key}><Icon name='plus-square' size={60}
-            type='font-awesome'
-            onPress={addTab} /></View>
+        return <View key={key}>
+            <Icon
+                name='plus-square' size={60}
+                type='font-awesome'
+                onPress={addTab} />
+        </View>
     }
 
     const renderRemoveBtn = (key) => {
@@ -46,7 +49,7 @@ export default function Tabs(props) {
 
         for (let index = 1; index <= tabsCount; index++) {
 
-            tabs.push(<TabButton placeholder={props.placeholder}
+            tabs.push(<TabButton isReadOnly={props.isReadOnly} placeholder={props.placeholder}
                 onEdit={handleTabEdit}
                 isSelected={index === selectedTab}
                 key={index}
@@ -56,8 +59,8 @@ export default function Tabs(props) {
         }
 
         if (!isEditingTab) {
-            if (tabsCount < 3) tabs.push(renderAddBtn(3));
-            if (tabsCount > 0) tabs.push(renderRemoveBtn(4));
+            if (tabsCount < 3 && !props.isReadOnly) tabs.push(renderAddBtn(3));
+            if (tabsCount > 0 && !props.isReadOnly) tabs.push(renderRemoveBtn(4));
         }
 
         return tabs;

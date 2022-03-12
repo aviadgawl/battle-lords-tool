@@ -4,9 +4,10 @@ import { StyleSheet, View } from 'react-native';
 import Stat from '../../components/stat/stat.component';
 import Champion from '../../components/champion/champion.component';
 import Tabs from '../../components/tabs/tabs.component';
-import PlayerNameOverlay from '../../components/player-name-overlay/player-name-overlay';
 
-export default function Player({ navigation, isReadOnly }) {
+export default function Player({ navigation, route }) {
+
+    //console.log(route?.params?.isReadOnly);
 
     const [championTabs, setChampionTabs] = useState(1);
     const [selectedChampionTab, setSelectedChampionTab] = useState(1);
@@ -21,7 +22,7 @@ export default function Player({ navigation, isReadOnly }) {
     }
 
     const handleRightSwipe = () => {
-        navigation.navigate('PlayerTwo');
+        navigation.navigate('PlayerTwo', { isReadOnly: true });
     }
 
     const renderChampions = () => {
@@ -29,7 +30,7 @@ export default function Player({ navigation, isReadOnly }) {
 
         for (let i = 0; i < championTabs; i++) {
             champions.push(<View key={i} style={selectedChampionTab === (i + 1) ? styles.show : styles.hide}>
-                <Champion />
+                <Champion isReadOnly={route?.params?.isReadOnly} />
             </View>);
         }
 
@@ -37,15 +38,15 @@ export default function Player({ navigation, isReadOnly }) {
     }
 
     const renderBuldings = () => {
-        let champions = [];
+        let buildings = [];
 
         for (let i = 0; i < buildingTabs; i++) {
-            champions.push(<View key={i} style={selectedBuildingTab === (i + 1) ? styles.show : styles.hide}>
-                <Stat icon="hp" title="HP:" startValue={27}></Stat>
+            buildings.push(<View key={i} style={selectedBuildingTab === (i + 1) ? styles.show : styles.hide}>
+                <Stat isReadOnly={route?.params?.isReadOnly} icon="hp" title="HP:" startValue={27}></Stat>
             </View>);
         }
 
-        return champions;
+        return buildings;
     }
 
     return (
@@ -57,7 +58,7 @@ export default function Player({ navigation, isReadOnly }) {
             }}>
 
             <View style={styles.championsTabs}>
-                <Tabs onSelectChange={(tabSelected) => { setSelectedChampionTab(tabSelected) }}
+                <Tabs isReadOnly={route?.params?.isReadOnly} onSelectChange={(tabSelected) => { setSelectedChampionTab(tabSelected) }}
                     onTabsCountChange={(tabsCount) => { setChampionTabs(tabsCount) }}
                     placeholder="Champion">
                 </Tabs>
@@ -68,7 +69,7 @@ export default function Player({ navigation, isReadOnly }) {
             </View>
 
             <View style={styles.championsTabs}>
-                <Tabs onSelectChange={(tabSelected) => { setSelectedBuildingTab(tabSelected) }}
+                <Tabs isReadOnly={route?.params?.isReadOnly} onSelectChange={(tabSelected) => { setSelectedBuildingTab(tabSelected) }}
                     onTabsCountChange={(tabsCount) => { setBuldingTabs(tabsCount) }}
                     placeholder="Building"></Tabs>
             </View>
