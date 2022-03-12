@@ -4,6 +4,13 @@ import { Icon } from 'react-native-elements';
 
 export default function Stat(props) {
 
+  const iconMap = {
+    hp: { name: 'heart', color: '#e04136' },
+    dex: { name: 'bolt', color: '#29cc47' },
+    str: { name: 'hand-rock-o', color: '#a6b825' },
+    int: { name: 'leanpub' , color: '#278bb0' }
+  };
+
   const [statValue, setStatValue] = React.useState(props.startValue);
 
   const incrment = () => {
@@ -14,35 +21,20 @@ export default function Stat(props) {
     if (statValue > 0) setStatValue(statValue - 1);
   }
 
-  const constGetIconName = () => {
-    switch (props.icon) {
-      case 'hp':
-        return 'heart';
-      case 'dex':
-        return 'bolt';
-      case 'str':
-        return 'hand-rock-o'
-      case 'int':
-        return 'leanpub'
-      default:
-        return '';
-    }
-  }
-
   return (
     <View style={styles.container}>
-      <Icon name={constGetIconName()} type='font-awesome' size={40} />
+      <Icon name={iconMap[props.icon]?.name} color={iconMap[props.icon]?.color} type="font-awesome" size={40} />
       <Text style={styles.text}>{props.title}</Text>
       {!props.isReadOnly && <Icon
-        name='minus-square'
-        type='font-awesome'
+        name="minus-square"
+        type="font-awesome"
         size={60}
         onPress={decrament}
       />}
       <Text style={styles.text}>{statValue}</Text>
       {!props.isReadOnly && <Icon
-        name='plus-square'
-        type='font-awesome'
+        name="plus-square"
+        type="font-awesome"
         size={60}
         onPress={incrment}
       />}
