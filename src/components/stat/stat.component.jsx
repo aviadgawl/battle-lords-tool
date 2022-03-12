@@ -1,14 +1,16 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Icon } from 'react-native-elements';
+import globalStyle from '../../styles/global-style';
 
 export default function Stat(props) {
+  const colors = globalStyle()?.colors;
 
   const iconMap = {
-    hp: { name: 'heart', color: '#e04136' },
-    dex: { name: 'bolt', color: '#29cc47' },
-    str: { name: 'hand-rock-o', color: '#a6b825' },
-    int: { name: 'leanpub' , color: '#278bb0' }
+    hp: { name: 'heart', color: colors?.hp },
+    dex: { name: 'bolt', color: colors?.dex },
+    str: { name: 'hand-rock-o', color: colors?.str },
+    int: { name: 'leanpub', color: colors?.int }
   };
 
   const [statValue, setStatValue] = React.useState(props.startValue);
