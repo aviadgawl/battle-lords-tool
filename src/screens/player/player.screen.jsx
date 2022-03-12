@@ -4,8 +4,9 @@ import { StyleSheet, View } from 'react-native';
 import Stat from '../../components/stat/stat.component';
 import Champion from '../../components/champion/champion.component';
 import Tabs from '../../components/tabs/tabs.component';
+import PlayerNameOverlay from '../../components/player-name-overlay/player-name-overlay';
 
-export default function Player({ navigation , isReadOnly }) {
+export default function Player({ navigation, isReadOnly }) {
 
     const [championTabs, setChampionTabs] = useState(1);
     const [selectedChampionTab, setSelectedChampionTab] = useState(1);
@@ -16,11 +17,11 @@ export default function Player({ navigation , isReadOnly }) {
     let pageX = 0;
 
     const handleLeftSwipe = () => {
-        navigation.navigate('Player One');
+        navigation.navigate('PlayerOne');
     }
 
     const handleRightSwipe = () => {
-        navigation.navigate('Player Two');
+        navigation.navigate('PlayerTwo');
     }
 
     const renderChampions = () => {
