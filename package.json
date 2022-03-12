@@ -6,7 +6,8 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "root": "ren web-build root"
+    "root": "ren web-build root",
+    "androidemu": "emulator -avd pixel-4-with-store"
   },
   "homepage": "/battle-lords-tool",
   "dependencies": {
