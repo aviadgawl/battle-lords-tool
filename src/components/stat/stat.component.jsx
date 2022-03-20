@@ -4,13 +4,12 @@ import { Icon } from 'react-native-elements';
 import globalStyle from '../../styles/global-style';
 
 export default function Stat(props) {
-  const colors = globalStyle()?.colors;
 
   const iconMap = {
-    hp: { name: 'heart', color: colors?.hp },
-    dex: { name: 'bolt', color: colors?.dex },
-    str: { name: 'hand-rock-o', color: colors?.str },
-    int: { name: 'leanpub', color: colors?.int }
+    hp: { name: 'heart' },
+    dex: { name: 'bolt' },
+    str: { name: 'hand-rock-o' },
+    int: { name: 'leanpub' }
   };
 
   const [statValue, setStatValue] = React.useState(props.startValue);
@@ -25,7 +24,7 @@ export default function Stat(props) {
 
   return (
     <View style={styles.container}>
-      <Icon name={iconMap[props.icon]?.name} color={iconMap[props.icon]?.color} type="font-awesome" size={40} />
+      <Icon name={iconMap[props.icon]?.name} color={globalStyle[props.icon]?.color} type="font-awesome" size={40} />
       <Text style={styles.text}>{props.title}</Text>
       {!props.isReadOnly && <Icon
         name="minus-square"
@@ -49,8 +48,9 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
     width: "100%",
+    marginLeft: '-10%',
   },
   text: {
     fontSize: 40,

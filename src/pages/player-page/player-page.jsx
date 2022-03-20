@@ -5,14 +5,21 @@ import Stat from '../../components/stat/stat.component';
 import Champion from '../../components/champion/champion.component';
 import Tabs from '../../components/tabs/tabs.component';
 
-export default function Player({ navigation, route }) {
+export default function PlayerPage({ navigation, route }) {
 
-    //console.log(route?.params?.isReadOnly);
+    const [playerData, setPlayerData] = useState({
+        name: route?.params?.name,
+        champions: [],
+        buidlings: [
+            {
+                name: 'Tower',
+                hp: 27
+            }
+        ]
+    });
 
-    const [championTabs, setChampionTabs] = useState(1);
-    const [selectedChampionTab, setSelectedChampionTab] = useState(1);
+    const [selectedChampionTab, setSelectedChampionTab] = useState(0);
 
-    const [buildingTabs, setBuldingTabs] = useState(1);
     const [selectedBuildingTab, setSelectedBuildingTab] = useState(1);
 
     let pageX = 0;
@@ -25,30 +32,6 @@ export default function Player({ navigation, route }) {
         navigation.navigate('PlayerTwo', { isReadOnly: true });
     }
 
-    const renderChampions = () => {
-        let champions = [];
-
-        for (let i = 0; i < championTabs; i++) {
-            champions.push(<View key={i} style={selectedChampionTab === (i + 1) ? styles.show : styles.hide}>
-                <Champion isReadOnly={route?.params?.isReadOnly} />
-            </View>);
-        }
-
-        return champions;
-    }
-
-    const renderBuldings = () => {
-        let buildings = [];
-
-        for (let i = 0; i < buildingTabs; i++) {
-            buildings.push(<View key={i} style={selectedBuildingTab === (i + 1) ? styles.show : styles.hide}>
-                <Stat isReadOnly={route?.params?.isReadOnly} icon="hp" title="HP:" startValue={27}></Stat>
-            </View>);
-        }
-
-        return buildings;
-    }
-
     return (
         <View style={styles.viewContainer}
             onTouchStart={(e) => { pageX = e.nativeEvent.pageX }}
@@ -58,24 +41,37 @@ export default function Player({ navigation, route }) {
             }}>
 
             <View style={styles.championsTabs}>
-                <Tabs isReadOnly={route?.params?.isReadOnly} onSelectChange={(tabSelected) => { setSelectedChampionTab(tabSelected) }}
-                    onTabsCountChange={(tabsCount) => { setChampionTabs(tabsCount) }}
+                <Tabs isReadOnly={route?.params?.isReadOnly}
+                    selecetedTab={selectedChampionTab}
+                    tabs={playerData.champions.length}
+                    onSelectChange={(tabSelected) => { setSelectedChampionTab(tabSelected) }}
+                    onTabsCountChange={(championTabsCount) => { setChampionTabs(championTabsCount) }}
                     placeholder="Champion">
                 </Tabs>
             </View>
 
             <View style={styles.championStats}>
-                {renderChampions()}
+                {playerData.champions.map((champion, i) => <View key={champion.name}
+                    style={selectedChampionTab === (i + 1) ? styles.show : styles.hide}>
+                    <Champion isReadOnly={route?.params?.isReadOnly} />
+                </View>)}
             </View>
 
             <View style={styles.championsTabs}>
-                <Tabs isReadOnly={route?.params?.isReadOnly} onSelectChange={(tabSelected) => { setSelectedBuildingTab(tabSelected) }}
-                    onTabsCountChange={(tabsCount) => { setBuldingTabs(tabsCount) }}
+                <Tabs isReadOnly={route?.params?.isReadOnly}
+                    selecetedTab={selectedChampionTab}
+                    tabs={playerData.buidlings.length}
+                    onSelectChange={(tabSelected) => { setSelectedBuildingTab(tabSelected) }}
+                    onTabsCountChange={(buildingTabsCount) => { setBuldingTabs(buildingTabsCount) }}
                     placeholder="Building"></Tabs>
             </View>
 
             <View style={styles.castleStats}>
-                {renderBuldings()}
+                {playerData.buidlings.map((building, i) => <View key={building.name}
+                    style={selectedBuildingTab === (i + 1) ? styles.show : styles.hide}>
+                    <Stat isReadOnly={route?.params?.isReadOnly} icon="hp"
+                        title="HP:" startValue={27}></Stat>
+                </View>)}
             </View>
         </View>
     );

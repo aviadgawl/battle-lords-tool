@@ -1,11 +1,16 @@
+import { StyleSheet } from 'react-native';
 
-export default function globalStyle() {
-    return {
-        colors: {
-          hp: '#cf221f',
-          dex: '#29cc47',
-          int: '#1f91cf',
-          str: '#c3cf1f',
-        }
-    };
-};
+export default globalStyle = StyleSheet.create({
+  hp: {
+    color: '#cf221f'
+  },
+  dex: {
+    color: '#29cc47'
+  },
+  int: {
+    color: '#1f91cf'
+  },
+  str: {
+    color: '#c3cf1f'
+  }
+});

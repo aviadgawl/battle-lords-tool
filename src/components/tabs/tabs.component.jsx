@@ -5,19 +5,15 @@ import { Icon } from 'react-native-elements';
 
 export default function Tabs(props) {
 
-    const [tabsCount, setTabsCount] = useState(1);
-    const [selectedTab, setSelectedTab] = useState(1);
     const [isEditingTab, setIsEditingTab] = useState(true);
 
     const addTab = () => {
-        setTabsCount(tabsCount + 1);
         setIsEditingTab(true);
-        props.onTabsCountChange(tabsCount + 1);
+        props.onTabsCountChange(props.tabs + 1);
     }
 
     const removeTab = () => {
-        setTabsCount(tabsCount - 1);
-        props.onTabsCountChange(tabsCount - 1);
+        props.onTabsCountChange(props.tabs - 1);
     }
 
     const handleTabEdit = (isEditing) => {
@@ -25,7 +21,6 @@ export default function Tabs(props) {
     }
 
     const handleTabButtonClick = (index) => {
-        setSelectedTab(index);
         props.onSelectChange(index);
     }
 
@@ -47,11 +42,11 @@ export default function Tabs(props) {
     const renderTabs = () => {
         let tabs = [];
 
-        for (let index = 1; index <= tabsCount; index++) {
+        for (let index = 1; index <= props.tabs; index++) {
 
             tabs.push(<TabButton isReadOnly={props.isReadOnly} placeholder={props.placeholder}
                 onEdit={handleTabEdit}
-                isSelected={index === selectedTab}
+                isSelected={index === props.selecetedTab}
                 key={index}
                 index={index}
                 onClick={handleTabButtonClick}>
@@ -59,8 +54,8 @@ export default function Tabs(props) {
         }
 
         if (!isEditingTab) {
-            if (tabsCount < 3 && !props.isReadOnly) tabs.push(renderAddBtn(3));
-            if (tabsCount > 0 && !props.isReadOnly) tabs.push(renderRemoveBtn(4));
+            if (props.tabs < 3 && !props.isReadOnly) tabs.push(renderAddBtn(3));
+            if (props.tabs > 0 && !props.isReadOnly) tabs.push(renderRemoveBtn(4));
         }
 
         return tabs;
@@ -76,5 +71,6 @@ const styles = StyleSheet.create({
         flex: 1,
         width: '100%',
         flexDirection: 'row',
+        alignItems: 'center',
     }
 });
